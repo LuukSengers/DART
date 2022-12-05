@@ -20,13 +20,13 @@ def wake_model(df_inflow,dict_LUT):
     ## transformations
     for i in range(len(transformations)):
         if transformations[i] == 'log': 
-            df_inflow.iloc[:,i] = np.log(df_inflow.iloc[:,i])
+            df_inflow.iloc[:,i] = np.log(np.abs(df_inflow.iloc[:,i]))*np.sign(df_inflow.iloc[:,i])
         elif transformations[i] == 'exp':
             df_inflow.iloc[:,i] = np.exp(df_inflow.iloc[:,i])
         elif transformations[i] == 'rec':
             df_inflow.iloc[:,i] = 1/df_inflow.iloc[:,i]
         elif transformations[i] == 'sqrt':
-            df_inflow.iloc[:,i] = np.sqrt(df_inflow.iloc[:,i])  
+            df_inflow.iloc[:,i] = np.sqrt(np.abs(df_inflow.iloc[:,i]))*np.sign(df_inflow.iloc[:,i])
     input_val = np.squeeze(df_inflow.values)    
     
     ## polynomial features
@@ -145,13 +145,13 @@ def make_LUT_coefs(df_inflow,df_params,transformations,Ds):
     ## Transformations
     for i in range(len(transformations)):
         if transformations[i] == 'log': 
-            df_inflow.iloc[:,i] = np.log(df_inflow.iloc[:,i])
+            df_inflow.iloc[:,i] = np.log(np.abs(df_inflow.iloc[:,i]))*np.sign(df_inflow.iloc[:,i])
         elif transformations[i] == 'exp':
             df_inflow.iloc[:,i] = np.exp(df_inflow.iloc[:,i])
         elif transformations[i] == 'rec':
             df_inflow.iloc[:,i] = 1/df_inflow.iloc[:,i]
         elif transformations[i] == 'sqrt':
-            df_inflow.iloc[:,i] = np.sqrt(df_inflow.iloc[:,i])
+            df_inflow.iloc[:,i] = np.sqrt(np.abs(df_inflow.iloc[:,i]))*np.sign(df_inflow.iloc[:,i])
             
     targets = ['A_z','mu_y','mu_z','sigma_y','sigma_z','c','t','s_a','s_b']
     dict_LUT = {}
